@@ -27,14 +27,14 @@ export class ToggleButtonModel {
     let buttonOptions: ButtonOptions = undefined
     this.options.data.forEach((entry, index) => {
       buttonOptions = undefined
-      if ('value' in entry) {
+      if ('content' in entry) {
         let opacity = 1
         if (typeof entry.enable == 'boolean' && !entry.enable) {
           opacity = 0.38
         }
         buttonOptions = {
           variant: ButtonVariant.TEXT,
-          content: entry.value,
+          content: entry.content,
           responseCode: index,
           backgroundColor: this.options.backgroundColor,
           height: this.options.height,

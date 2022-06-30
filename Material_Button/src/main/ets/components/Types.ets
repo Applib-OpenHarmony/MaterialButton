@@ -30,7 +30,7 @@ export enum ToggleSelection {
 }
 
 export type TextualToggleType = {
-  value: string
+  content: string
   checked?: boolean
   enable?: boolean
 }

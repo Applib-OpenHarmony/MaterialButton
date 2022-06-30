@@ -82,11 +82,11 @@ struct Shopping {
       }
       Text("Available Sizes").fontSize(20).margin({ bottom: 10 })
       ToggleButton({
-        data: [{ value: this.AvailableSizes[0], checked: false, enable: true }, {
-          value: this.AvailableSizes[1],
+        data: [{ content: this.AvailableSizes[0], checked: false, enable: true }, {
+          content: this.AvailableSizes[1],
           checked: true,
           enable: true
-        }, { value: this.AvailableSizes[2], checked: false }, { value: this.AvailableSizes[3], checked: false }],
+        }, { content: this.AvailableSizes[2], checked: false }, { content: this.AvailableSizes[3], checked: false }],
         backgroundColor: Color.White,
         selectedBackgroundColor: "#FF1493",
         width: 90,

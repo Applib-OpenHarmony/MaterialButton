@@ -77,7 +77,7 @@ struct Index {
       })
       Text("Material Toggle Button (Text)").fontSize(18).fontColor(Color.Green).alignSelf(ItemAlign.Start).margin({bottom:10, top: 20})
       ToggleButton({
-        data:[{value: "T1", checked:false, enable: true}, {value:"T2", checked:false, enable:false}, {value: "T3", checked:false}],
+        data:[{content: "T1", checked:false, enable: true}, {content:"T2", checked:false, enable:false}, {content: "T3", checked:false}],
         backgroundColor: Color.White,
         selectedBackgroundColor:Color.Yellow,
         width:60,
