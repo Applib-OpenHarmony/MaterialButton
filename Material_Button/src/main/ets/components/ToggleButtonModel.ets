@@ -77,11 +77,7 @@ export class ToggleButtonModel {
       if (options.selectionType != undefined) this.options.selectionType = options.selectionType
       if (options.selectedBorderWidth != undefined) this.options.selectedBorderWidth = options.selectedBorderWidth
       if (options.toggleBorderWidth != undefined) this.options.toggleBorderWidth = options.toggleBorderWidth
-      console.log("update backgroundColor=" + options.backgroundColor)
-      if (options.backgroundColor != undefined) {
-        console.log("update backgroundColor1=" + options.backgroundColor)
-        this.options.backgroundColor = options.backgroundColor
-       }
+      if (options.backgroundColor != undefined) this.options.backgroundColor = options.backgroundColor
       if (options.fontColor != undefined) this.options.fontColor = options.fontColor
       if (options.fontSize != undefined) this.options.fontSize = options.fontSize
       if (options.width != undefined) this.options.width = options.width
@@ -90,7 +86,6 @@ export class ToggleButtonModel {
       if (options.checkedBackgroundColor != undefined) this.options.checkedBackgroundColor = options.checkedBackgroundColor
       if (options.selectedBackgroundColor != undefined) {
         this.options.selectedBackgroundColor = options.selectedBackgroundColor
-        console.log("update selectedBackgroundColor=" + options.selectedBackgroundColor)
       }
       if (options.toggleBorderColor != undefined) this.options.toggleBorderColor = options.toggleBorderColor
       if (options.toggleBorderRadius != undefined) this.options.toggleBorderRadius = options.toggleBorderRadius
@@ -98,16 +93,13 @@ export class ToggleButtonModel {
   }
 
   checkOrUncheck(sel: number) {
-    console.log("checkOrUncheck sel2=" + sel)
     this.unCheckAll(sel)
     if (this.buttonSelStatus[sel]) {
       this.buttonSelStatus[sel] = false
       this.buttonModelList[sel].options.backgroundColor = this.options.backgroundColor
-      console.log("checkOrUncheck sel3=" + this.buttonModelList[sel].options.backgroundColor )
     } else {
       this.buttonSelStatus[sel] = true
       this.buttonModelList[sel].options.backgroundColor = this.options.selectedBackgroundColor
-      console.log("checkOrUncheck sel4=" + this.buttonModelList[sel].options.backgroundColor )
     }
   }
 

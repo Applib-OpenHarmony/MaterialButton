@@ -130,7 +130,6 @@ struct Shopping {
   }
 
   readMoreOpenClose() {
-    console.log("read more open close")
     if (this.readMore) {
       this.descriptionHt = "148"
     } else {

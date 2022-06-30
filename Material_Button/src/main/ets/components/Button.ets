@@ -48,8 +48,6 @@ export struct MButton {
   @State private clickCoordinates: Position = { x: 0, y: 0 } // click event coordinates
 
   aboutToAppear() {
-    console.log("aboutToAppear Button Called")
-    console.log(" this.buttonModel=" + JSON.stringify(this.buttonModel))
     if (this.buttonModel == undefined) {
       this.buttonModel = new ButtonModel({
         variant: this.variant,
