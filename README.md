@@ -14,7 +14,7 @@ For using material button in your app, add the below dependency in entry/package
 
 ```
 "dependencies": {
-"mdc_button": "file:../button"
+"@ohos/Material_Button": "file:../Material_Button"
 }
 ```
 
@@ -23,7 +23,7 @@ For using material button in your app, add the below dependency in entry/package
 ##### 1. Adding Material Contained button to the application, Material button is implemented as "MButton" component
 
 ```javascript
-import {MButton, ButtonVariant, ButtonOptions} from "mdc_button"
+import {MButton, ButtonVariant, ButtonOptions} from "@ohos/Material_Button"
 
 @Component
 struct Index {
@@ -51,7 +51,7 @@ struct Index {
 ```
 ##### 2. Adding Material Toggle button to the application
 ```javascript
-import {ToggleButton, ButtonOptions, ToggleButtonOptions} from "mdc_button"
+import {ToggleButton, ButtonOptions, ToggleButtonOptions} from "@ohos/Material_Button"
 @Component
 struct Index {
   private toggleButtonText : ToggleButtonOptions = {
