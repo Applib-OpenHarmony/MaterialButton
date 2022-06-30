@@ -114,7 +114,7 @@ struct Index {
 | `checkedBackgroundColor` | `ResourceColor` | selected background color |
 
 ## Contribution Code
-Any questions found during the use process can be submitted to us by [Issue](https://codehub-y.huawei.com/JSComponents-India-Openharmony/material-components-ohos/issues). Of course, we welcome you to send us [PR](https://codehub-y.huawei.com/JSComponents-India-Openharmony/material-components-ohos/merge_requests).
+Any questions found during the use process can be submitted to us by [Issue](https://github.com/Applib-OpenHarmony/MaterialButton/issues). Of course, we welcome you to send us [PR](https://github.com/Applib-OpenHarmony/MaterialButton/pulls).
 
 ## Open Source Protocol
-This project is based on [Apache License 2.0](https://codehub-y.huawei.com/JSComponents-India-Openharmony/material-components-ohos/files?ref=master&filePath=LICENSE.txt&isFile=true). Please enjoy and participate freely in open source.
+This project is based on [Apache License 2.0](https://github.com/Applib-OpenHarmony/MaterialButton/blob/main/LICENSE.txt). Please enjoy and participate freely in open source.
