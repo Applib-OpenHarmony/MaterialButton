@@ -102,7 +102,7 @@ struct Index {
 | `data` | `TextualToggleType[] or IconToggleType[]` | List of Text or Icon buttons |
 | `width` | `Length` | width of each button |
 | `height` | `Length` | height of each button |
-| `cbSelectionOnClick` | `(checkedIndexes: number[]) => void` | call back with selected index |
+| `cbSelectionOnClick` | `(checkedIndexes: number[]) => void` | set call back with selected index |
 | `toggleBorderWidth` | `number` | toggle Border width |
 | `borderWidth` | `number` | border width |
 | `backgroundColor` | `ResourceColor` | background color |
