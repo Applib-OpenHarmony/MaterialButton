@@ -14,59 +14,58 @@ For using material button in your app, add the below dependency in entry/package
 
 ```
 "dependencies": {
-"mdc_button": "file:../button"
+"@ohos/Material_Button": "file:../Material_Button"
 }
 ```
 
 ## Usage Instructions
 
-##### 1. Adding Material Contained button to the application, Material button is implemented as "MButton" component
+##### 1. Material Button is added by importing Mbutton to application, and by passing Button options we can set the attributes of button, like BackGround, FontSize etc..
 
 ```javascript
-import {MButton, ButtonVariant, ButtonOptions} from "mdc_button"
+import {MButton, ButtonVariant, ButtonOptions} from "@ohos/Material_Button"
 
 @Component
 struct Index {
-  private buttonContained : ButtonOptions = {
-  variant: ButtonVariant.CONTAINED, //Select Button Type TEXT/OUTLINED/CONTAINED
-  content : "BUTTON",
-  fontSize:24,
-  fontColor: Color.Blue,
-  width:200,
-  backgroundColor:Color.Orange,
-  elevation:1,
-  rippleColor: Color.Black
-  }
-
   build() {
     Column() {
-      MButton({options: this.buttonContained, cbOnClick: this.buttonClicked})
+      MButton(variant: ButtonVariant.CONTAINED,
+      backgroundColor: "#D3D3D3",
+      content: "Continue",
+      fontSize: 20,
+      margin: { left: 120 },
+      fontColor: Color.Black,
+      cbOnClick: () => this.readMoreOpenClose())
     }
   }
 
-  buttonClicked() {
+  readMoreOpenClose() {
     prompt.showToast({message: "Button clicked"})
   }
 }
 ```
-##### 2. Adding Material Toggle button to the application
+##### 2. Adding Material Toggle button to the application, we can set both Text and Icon for Toggle button.
 ```javascript
-import {ToggleButton, ButtonOptions, ToggleButtonOptions} from "mdc_button"
+import {ToggleButton, ButtonOptions, ToggleButtonOptions} from "@ohos/Material_Button"
 @Component
 struct Index {
-  private toggleButtonText : ToggleButtonOptions = {
-    data:[{value: "T1", checked:true}, {value:"T2", checked:false}, {value: "T3", checked:false}],
-    backgroundColor: Color.White,
-    width:60,
-    borderWidth: 1,
-    height:60}
     build() {
       Column() {
-        ToggleButton({ options: this.toggleButtonText, cbSelectionOnClick: this.toggleIndexSelected})
+        ToggleButton({
+          data: [{ content: "Text1", checked: false, enable: true }, {content: "Text2", checked: true, enable: true}, { content: "Text3", checked: false }],
+          backgroundColor: Color.White,
+          selectedBackgroundColor: "#FF1493",
+          width: 90,
+          height: 60,
+          fontSize: 13,
+          toggleBorderWidth: 1,
+          fontColor: Color.Black,
+          cbSelectionOnClick: (checkedIndexes) => this.sizeSelect(checkedIndexes)
+      })
       }
     }
     
-    toggleIndexSelected(checkedIndexes: number[]) {
+    sizeSelect(checkedIndexes: number[]) {
       prompt.showToast({message: "Toggle Button Selected Index " + checkedIndexes[0]})
     }
 }
@@ -114,7 +113,7 @@ struct Index {
 | `checkedBackgroundColor` | `ResourceColor` | selected background color |
 
 ## Contribution Code
-Any questions found during the use process can be submitted to us by [Issue](https://codehub-y.huawei.com/JSComponents-India-Openharmony/material-components-ohos/issues). Of course, we welcome you to send us [PR](https://codehub-y.huawei.com/JSComponents-India-Openharmony/material-components-ohos/merge_requests).
+Any questions found during the use process can be submitted to us by [Issue](https://github.com/Applib-OpenHarmony/MaterialButton/issues). Of course, we welcome you to send us [PR](https://github.com/Applib-OpenHarmony/MaterialButton/pulls).
 
 ## Open Source Protocol
-This project is based on [Apache License 2.0](https://codehub-y.huawei.com/JSComponents-India-Openharmony/material-components-ohos/files?ref=master&filePath=LICENSE.txt&isFile=true). Please enjoy and participate freely in open source.
+This project is based on [Apache License 2.0](https://github.com/Applib-OpenHarmony/MaterialButton/blob/main/LICENSE.txt). Please enjoy and participate freely in open source.
