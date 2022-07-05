@@ -14,7 +14,7 @@ For using material button in your app, add the below dependency in entry/package
 
 ```
 "dependencies": {
-"@ohos/Material_Button": "file:../Material_Button"
+"@ohos/material-button": "file:../Material_Button"
 }
 ```
 
@@ -23,7 +23,7 @@ For using material button in your app, add the below dependency in entry/package
 ##### 1. Material Button is added by importing Mbutton to application, and by passing Button options we can set the attributes of button, like BackGround, FontSize etc..
 
 ```javascript
-import {MButton, ButtonVariant, ButtonOptions} from "@ohos/Material_Button"
+import {MButton, ButtonVariant, ButtonOptions} from "@ohos/material-button"
 
 @Component
 struct Index {
@@ -46,7 +46,7 @@ struct Index {
 ```
 ##### 2. Adding Material Toggle button to the application, we can set both Text and Icon for Toggle button.
 ```javascript
-import {ToggleButton, ButtonOptions, ToggleButtonOptions} from "@ohos/Material_Button"
+import {ToggleButton, ButtonOptions, ToggleButtonOptions} from "@ohos/material-button"
 @Component
 struct Index {
     build() {

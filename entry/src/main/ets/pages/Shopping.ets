@@ -15,7 +15,7 @@
  */
  
 import prompt from '@system.prompt'
-import { MButton, ButtonVariant, ToggleButton } from "@ohos/Material_Button"
+import { MButton, ButtonVariant, ToggleButton } from "@ohos/material-button"
 
 @Entry
 @Component

@@ -35,13 +35,13 @@ export type TextualToggleType = {
   enable?: boolean
 }
 
-export type IconToggleType = {
+export interface IconToggleType {
   iconSrc: string | PixelMap | Resource
   checked: boolean
   enable?: boolean
 }
 
-export type ToggleButtonOptions = {
+export interface ToggleButtonOptions {
   data?: TextualToggleType[] | IconToggleType[]
   width?: number
   height?: number
@@ -59,7 +59,7 @@ export type ToggleButtonOptions = {
   checkedBackgroundColor? : ResourceColor
 }
 
-export type ButtonOptions = {
+export interface ButtonOptions {
   variant? : ButtonVariant
   responseCode? : number
   content? : string

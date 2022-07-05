@@ -10,6 +10,6 @@
   "repository": {},
   "license": "ISC",
   "dependencies": {
-    "@ohos/Material_Button": "file:../Material_Button"
+    "@ohos/material-button": "file:../Material_Button"
   }
 }

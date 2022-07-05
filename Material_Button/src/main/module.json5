@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "Material_Button",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}
