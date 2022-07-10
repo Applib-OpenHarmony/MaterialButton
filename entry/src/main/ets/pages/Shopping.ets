@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 import prompt from '@system.prompt'
 import { MButton, ButtonVariant, ToggleButton } from "@ohos/material-button"
 
@@ -50,24 +50,32 @@ struct Shopping {
             .fontColor(Color.Grey)
           Row() {
             MButton({
-              variant: ButtonVariant.OUTLINED,
-              backgroundColor: Color.White,
-              content: "Back",
-              borderColor: Color.Grey,
-              borderWidth:1,
-              fontSize: 20,
-              margin: { left: 10 },
-              fontColor: Color.Black,
-              cbOnClick: () => this.readMoreOpenClose()
+              options: {
+                variant: ButtonVariant.OUTLINED,
+                backgroundColor: Color.White,
+                content: "Back",
+                borderColor: Color.Grey,
+                borderWidth: 1,
+                fontSize: 20,
+                margin: { left: 10 },
+                fontColor: Color.Black
+              },
+              clickCallBack: {
+                callback: () => this.readMoreOpenClose()
+              }
             })
             MButton({
-              variant: ButtonVariant.CONTAINED,
-              backgroundColor: "#D3D3D3",
-              content: "Continue",
-              fontSize: 20,
-              margin: { left: 120 },
-              fontColor: Color.Black,
-              cbOnClick: () => this.readMoreOpenClose()
+              options: {
+                variant: ButtonVariant.CONTAINED,
+                backgroundColor: "#D3D3D3",
+                content: "Continue",
+                fontSize: 20,
+                margin: { left: 120 },
+                fontColor: Color.Black
+              },
+              clickCallBack: {
+                callback: () => this.readMoreOpenClose()
+              }
             })
           }
           .height(50)
@@ -75,39 +83,54 @@ struct Shopping {
           .margin({ top: 15 })
         }
       }.width("100%").height(this.descriptionHt)
+
       if (!this.readMore) {
-        MButton({ content: "read more", fontColor: Color.Black,
-          fontSize: 18,
-          cbOnClick: () => this.readMoreOpenClose()})
+        MButton({
+          options: {
+            variant: ButtonVariant.TEXT
+            content: "read more",
+            fontColor: Color.Black,
+            fontSize: 18
+          },
+          clickCallBack: {
+            callback: () => this.readMoreOpenClose()
+          }
+        })
       }
       Text("Available Sizes").fontSize(20).margin({ bottom: 10 })
       ToggleButton({
-        data: [{ content: this.AvailableSizes[0], checked: false, enable: true }, {
-          content: this.AvailableSizes[1],
-          checked: true,
-          enable: true
-        }, { content: this.AvailableSizes[2], checked: false }, { content: this.AvailableSizes[3], checked: false }],
-        backgroundColor: Color.White,
-        selectedBackgroundColor: "#FF1493",
-        width: 90,
-        height: 60,
-        fontSize: 13,
-        toggleBorderWidth: 1,
-        fontColor: Color.Black,
-        cbSelectionOnClick: (checkedIndexes) => this.sizeSelect(checkedIndexes)
+        options: {
+          data: [{ content: this.AvailableSizes[0], checked: false, enable: true }, {
+            content: this.AvailableSizes[1],
+            checked: true,
+            enable: true
+          }, { content: this.AvailableSizes[2], checked: false }, { content: this.AvailableSizes[3], checked: false }],
+          backgroundColor: Color.White,
+          selectedBackgroundColor: "#FF1493",
+          width: 90,
+          height: 60,
+          fontSize: 13,
+          toggleBorderWidth: 1,
+          fontColor: Color.Black
+        },
+        onToggleSelection: (checkedIndexes: number[]) => this.sizeSelect(checkedIndexes)
       })
       Divider().height(60).color(Color.White)
       Flex({ justifyContent: FlexAlign.End }) {
         MButton({
-          variant: ButtonVariant.CONTAINED,
-          backgroundColor: "#FF1493",
-          content: "Add to Cart",
-          iconSrc: $r('app.media.shopping_bag'),
-          fontSize: 22,
-          fontColor: Color.White,
-          height: 60,
-          width: 280,
-          cbOnClick: (event, responseCode) => this.addToCart()
+          options: {
+            variant: ButtonVariant.CONTAINED,
+            backgroundColor: "#FF1493",
+            content: "Add to Cart",
+            iconSrc: $r('app.media.shopping_bag'),
+            fontSize: 22,
+            fontColor: Color.White,
+            height: 60,
+            width: 280
+          },
+          clickCallBack: {
+            callback: (event, responseCode) => this.addToCart()
+          }
         })
       }
       .margin({ right: 15 })

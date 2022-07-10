@@ -59,24 +59,28 @@ export interface ToggleButtonOptions {
   checkedBackgroundColor? : ResourceColor
 }
 
+export interface IButtonOptions {
+  options : ButtonOptions
+}
+
 export interface ButtonOptions {
   variant? : ButtonVariant
-  responseCode? : number
   content? : string
   iconSrc? : string | PixelMap | Resource
-  borderStyle?: BorderStyle
-  borderWidth?: number
-  borderRadius?: number
-  backgroundColor?: ResourceColor
-  fontColor?: ResourceColor
-  borderColor?: ResourceColor
-  fontSize?: number
-  width?: number
-  height?: number
-  margin?: Margin | Length
-  padding?: Padding | Length
-  elevation?: number
-  ripple?: boolean
-  rippleColor?: ResourceColor
-  opacity?: number
+  borderStyle? : BorderStyle
+  borderWidth? : number
+  borderRadius? : number
+  backgroundColor? : ResourceColor
+  fontColor? : ResourceColor
+  borderColor? : ResourceColor
+  fontSize? : number
+  width? : number
+  height? : number
+  margin? : Margin | Length
+  padding? : Padding | Length
+  elevation? : number
+  ripple? : boolean
+  rippleColor? : ResourceColor
+  opacity? : number
+  responseCode?: number
 }

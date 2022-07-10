@@ -14,130 +14,82 @@
  * limitations under the License.
  */
  
-import { ButtonVariant } from "./Types"
+import { ButtonOptions } from "./Types"
 import { ButtonModel } from './ButtonModel'
 import { rippleUtils } from './Ripple'
 
 @Component
-export struct MButton {
-  @State variant?: ButtonVariant = ButtonVariant.TEXT
-  @State responseCode?: number = undefined
-  @State content?: string = undefined
-  private iconSrc?: string | PixelMap | Resource = undefined
-  @State borderStyle?: BorderStyle = undefined
-  @State borderWidth?: number = undefined
-  @State borderRadius: number = undefined
-  private backgroundColor?: ResourceColor = undefined
-  private fontColor?: ResourceColor = undefined
-  private borderColor?: ResourceColor = undefined
-  @State fontSize?: number = 20
-  @State width?: number = undefined
-  @State height?: number = undefined
-  private margin?: Margin | Length = undefined
-  private padding?: Padding | Length = undefined
-  @State elevation?: number = undefined
-  @State ripple: boolean = true
-  @State showRipple: boolean = false
-  @State rippleColor?: ResourceColor = Color.White
-  @State opacity?: number = 1
-  @State buttonModel: ButtonModel = undefined
-  private cbOnClick: (event: ClickEvent, responseCode?: number) => void = undefined;
+export struct MButton{
+  private options : ButtonOptions = undefined
+  private clickCallBack: {
+    responseCode?: number,
+    callback : (event: ClickEvent, responseCode?: number) => void
+  }
+
+  @State model: ButtonModel = undefined
+  private getModel: (ButtonModel) => void = undefined
+
   @State iconHeight: number = 30
-  @State private containerSize: SizeOptions = {}
-  @State border: BorderOptions = {}  // set custom border config
-  @State private clickCoordinates: Position = { x: 0, y: 0 } // click event coordinates
+  @State containerSize: SizeOptions = {}
+  @State clickCoordinates: Position = { x: 0, y: 0 } // click event coordinates
+  @State border: BorderOptions = {}
+  @State showRipple: boolean = false
 
   aboutToAppear() {
-    if (this.buttonModel == undefined) {
-      this.buttonModel = new ButtonModel({
-        variant: this.variant,
-        responseCode: this.responseCode,
-        content: this.content,
-        iconSrc: this.iconSrc,
-        borderStyle: this.borderStyle,
-        borderWidth: this.borderWidth,
-        borderRadius: this.borderRadius,
-        backgroundColor: this.backgroundColor,
-        fontColor: this.fontColor,
-        borderColor: this.borderColor,
-        fontSize: this.fontSize,
-        width: this.width,
-        height: this.height,
-        margin: this.margin,
-        padding: this.padding,
-        elevation: this.elevation,
-        ripple: this.ripple,
-        rippleColor: this.rippleColor,
-        opacity: this.opacity
-      });
+    if (this.model == undefined) {
+      this.model = new ButtonModel(this.options);
     }
-    if (this.buttonModel.options.variant != undefined) this.variant = this.buttonModel.options.variant
-    if (this.buttonModel.options.responseCode != undefined) this.responseCode = this.buttonModel.options.responseCode
-    if (this.buttonModel.options.content != undefined) this.content = this.buttonModel.options.content
-    if (this.buttonModel.options.iconSrc != undefined) this.iconSrc = this.buttonModel.options.iconSrc
-    if (this.buttonModel.options.borderStyle != undefined) this.borderStyle = this.buttonModel.options.borderStyle
-    if (this.buttonModel.options.borderWidth != undefined) this.borderWidth = this.buttonModel.options.borderWidth
-    if (this.buttonModel.options.borderRadius != undefined) this.borderRadius = this.buttonModel.options.borderRadius
-    if (this.buttonModel.options.backgroundColor != undefined) this.backgroundColor = this.buttonModel.options.backgroundColor
-    if (this.buttonModel.options.fontColor != undefined) this.fontColor = this.buttonModel.options.fontColor
-    if (this.buttonModel.options.borderColor != undefined) this.borderColor = this.buttonModel.options.borderColor
-    if (this.buttonModel.options.fontSize != undefined) this.fontSize = this.buttonModel.options.fontSize
-    if (this.buttonModel.options.width != undefined) this.width = this.buttonModel.options.width
-    if (this.buttonModel.options.height != undefined) this.height = this.buttonModel.options.height
-    if (this.buttonModel.options.margin != undefined) this.margin = this.buttonModel.options.margin
-    if (this.buttonModel.options.padding != undefined) this.padding = this.buttonModel.options.padding
-    if (this.buttonModel.options.elevation != undefined) this.elevation = this.buttonModel.options.elevation
-    if (this.buttonModel.options.ripple != undefined) this.ripple = this.buttonModel.options.ripple
-    if (this.buttonModel.options.rippleColor != undefined) this.rippleColor = this.buttonModel.options.rippleColor
-    if (this.buttonModel.options.opacity != undefined) this.opacity = this.buttonModel.options.opacity
-    if (this.buttonModel.options.borderRadius != undefined) this.border.radius = this.buttonModel.options.borderRadius
+    if (this.getModel) {
+      this.getModel(this.model)
+    }
   }
 
   build() {
     Stack() {
+      Column()
       Button() {
         Row() {
-          if (this.iconSrc) {
-            Image(this.iconSrc)
+          if (this.model.iconSrc) {
+            Image(this.model.iconSrc)
               .width(this.iconHeight)
               .height(this.iconHeight)
-              .margin({ right: this.buttonModel.spaceBetweenIconAndText })
-              .backgroundColor(this.backgroundColor)
+              .margin({ right: this.model.spaceBetweenIconAndText })
+              .backgroundColor(this.model.backgroundColor)
           }
-          if (this.content) {
-            Text(this.content)
-              .fontColor(this.fontColor)
-              .fontSize(this.fontSize)
-              .backgroundColor(this.backgroundColor)
+          if (this.model.content) {
+            Text(this.model.content)
+              .fontColor(this.model.fontColor)
+              .fontSize(this.model.fontSize)
+              .backgroundColor(this.model.backgroundColor)
               .onAreaChange((oldValue, newValue) => {
                 if (typeof newValue.height == 'number')
                 this.iconHeight = newValue.height
               })
           }
         }.alignItems(VerticalAlign.Center)
-        .padding(this.padding)
+        .padding(this.model.padding)
       }
       .zIndex(1)
       .shadow({
-        radius: this.buttonModel.shadowRadius,
-        color: this.backgroundColor,
-        offsetY: this.elevation/4
+        radius: this.model.shadowRadius,
+        color: this.model.backgroundColor,
+        offsetY: this.model.elevation/4
       })
-      .height(this.height)
-      .width(this.width)
+      .height(this.model.height)
+      .width(this.model.width)
       .type(ButtonType.Normal)
-      .borderStyle(this.borderStyle)
-      .borderWidth(this.borderWidth)
-      .borderRadius(this.borderRadius)
-      .borderColor(this.borderColor)
-      .backgroundColor(this.backgroundColor)
-      .opacity(this.opacity)
+      .borderStyle(this.model.borderStyle)
+      .borderWidth(this.model.borderWidth)
+      .borderRadius(this.model.borderRadius)
+      .borderColor(this.model.borderColor)
+      .backgroundColor(this.model.backgroundColor)
+      .opacity(this.model.opacity)
       .onAreaChange((oldSize, newSize) => {
         this.containerSize.height = newSize.height
         this.containerSize.width = newSize.width
       })
       .onClick((event) => {
-        if (this.ripple) {
+        if (this.model.ripple) {
           this.clickCoordinates = {
             x: event.x,
             y: event.y
@@ -155,15 +107,15 @@ export struct MButton {
         border: $border,
         rippleStartPosition: $clickCoordinates,
         showRipple: $showRipple,
-        color: this.rippleColor,
+        color: this.model.rippleColor,
       })
     }
-    .margin(this.margin)
+    .margin(this.model.margin)
   }
 
   onClick(event: ClickEvent) {
-    if (this.cbOnClick) {
-      this.cbOnClick(event, this.responseCode)
+    if (this.clickCallBack.callback) {
+      this.clickCallBack.callback(event, this.clickCallBack.responseCode)
     }
   }
 }

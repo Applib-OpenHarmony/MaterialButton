@@ -13,19 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-import { ToggleButtonOptions, ToggleSelection, ButtonVariant, ButtonOptions } from "./Types"
+
+import { ToggleButtonOptions, ToggleSelection, ButtonVariant, ButtonOptions, TextualToggleType, IconToggleType } from "./Types"
 import { ButtonModel } from "./ButtonModel"
 
-export class ToggleButtonModel {
-  options: ToggleButtonOptions = {}
+export class ToggleButtonModel implements ToggleButtonOptions{
+  data: TextualToggleType[] | IconToggleType[] = []
+  width: number = 40
+  height: number = 40
+  selectionType: ToggleSelection = ToggleSelection.Single
+  toggleBorderWidth: number = 2
+  selectedBorderWidth: number = 2
+  backgroundColor: ResourceColor = Color.White
+  toggleBorderColor: ResourceColor = Color.Grey
+  toggleBorderRadius: number = undefined
+  selectedBackgroundColor: ResourceColor = "#D3D3D3"
+  fontColor: ResourceColor = Color.White
+  fontSize: number = 20
+  checkedVariant: ButtonVariant = ButtonVariant.TEXT
+  checkedBackgroundColor: ResourceColor = undefined
+  toggleButtonModel: ToggleButtonModel = undefined
   buttonModelList: ButtonModel[] = []
   buttonSelStatus: boolean[] = []
 
   constructor(inputOptions: ToggleButtonOptions) {
     this.update(inputOptions)
     let buttonOptions: ButtonOptions = undefined
-    this.options.data.forEach((entry, index) => {
+    this.data.forEach((entry, index) => {
       buttonOptions = undefined
       if ('content' in entry) {
         let opacity = 1
@@ -36,9 +50,9 @@ export class ToggleButtonModel {
           variant: ButtonVariant.TEXT,
           content: entry.content,
           responseCode: index,
-          backgroundColor: this.options.backgroundColor,
-          height: this.options.height,
-          width: this.options.width,
+          backgroundColor: this.backgroundColor,
+          height: this.height,
+          width: this.width,
           opacity: opacity,
           ripple:false
         }
@@ -51,18 +65,18 @@ export class ToggleButtonModel {
           variant: ButtonVariant.TEXT,
           iconSrc: entry.iconSrc,
           responseCode: index,
-          height: this.options.height,
-          width: this.options.width,
-          backgroundColor: this.options.backgroundColor,
+          height: this.height,
+          width: this.width,
+          backgroundColor: this.backgroundColor,
           opacity:opacity,
           ripple:false
         }
       }
       if (index > 0) {
-        buttonOptions['margin'] = {left: this.options.toggleBorderWidth}
+        buttonOptions['margin'] = {left: this.toggleBorderWidth}
       }
       let bm = new ButtonModel(buttonOptions)
-      bm.update(this.options)
+      bm.update(inputOptions)
       this.buttonModelList.push(bm)
       this.buttonSelStatus.push(false)
       if (entry.checked) {
@@ -73,22 +87,20 @@ export class ToggleButtonModel {
 
   update(options: ToggleButtonOptions) {
     if (options) {
-      if (options.data != undefined) this.options.data = options.data
-      if (options.selectionType != undefined) this.options.selectionType = options.selectionType
-      if (options.selectedBorderWidth != undefined) this.options.selectedBorderWidth = options.selectedBorderWidth
-      if (options.toggleBorderWidth != undefined) this.options.toggleBorderWidth = options.toggleBorderWidth
-      if (options.backgroundColor != undefined) this.options.backgroundColor = options.backgroundColor
-      if (options.fontColor != undefined) this.options.fontColor = options.fontColor
-      if (options.fontSize != undefined) this.options.fontSize = options.fontSize
-      if (options.width != undefined) this.options.width = options.width
-      if (options.height != undefined) this.options.height = options.height
-      if (options.checkedVariant != undefined) this.options.checkedVariant = options.checkedVariant
-      if (options.checkedBackgroundColor != undefined) this.options.checkedBackgroundColor = options.checkedBackgroundColor
-      if (options.selectedBackgroundColor != undefined) {
-        this.options.selectedBackgroundColor = options.selectedBackgroundColor
-      }
-      if (options.toggleBorderColor != undefined) this.options.toggleBorderColor = options.toggleBorderColor
-      if (options.toggleBorderRadius != undefined) this.options.toggleBorderRadius = options.toggleBorderRadius
+      if (options.data != undefined) this.data = options.data
+      if (options.selectionType != undefined) this.selectionType = options.selectionType
+      if (options.selectedBorderWidth != undefined) this.selectedBorderWidth = options.selectedBorderWidth
+      if (options.toggleBorderWidth != undefined) this.toggleBorderWidth = options.toggleBorderWidth
+      if (options.backgroundColor != undefined) this.backgroundColor = options.backgroundColor
+      if (options.fontColor != undefined) this.fontColor = options.fontColor
+      if (options.fontSize != undefined) this.fontSize = options.fontSize
+      if (options.width != undefined) this.width = options.width
+      if (options.height != undefined) this.height = options.height
+      if (options.checkedVariant != undefined) this.checkedVariant = options.checkedVariant
+      if (options.checkedBackgroundColor != undefined) this.checkedBackgroundColor = options.checkedBackgroundColor
+      if (options.selectedBackgroundColor != undefined) this.selectedBackgroundColor = options.selectedBackgroundColor
+      if (options.toggleBorderColor != undefined) this.toggleBorderColor = options.toggleBorderColor
+      if (options.toggleBorderRadius != undefined) this.toggleBorderRadius = options.toggleBorderRadius
     }
   }
 
@@ -96,10 +108,10 @@ export class ToggleButtonModel {
     this.unCheckAll(sel)
     if (this.buttonSelStatus[sel]) {
       this.buttonSelStatus[sel] = false
-      this.buttonModelList[sel].options.backgroundColor = this.options.backgroundColor
+      this.buttonModelList[sel].backgroundColor = this.backgroundColor
     } else {
       this.buttonSelStatus[sel] = true
-      this.buttonModelList[sel].options.backgroundColor = this.options.selectedBackgroundColor
+      this.buttonModelList[sel].backgroundColor = this.selectedBackgroundColor
     }
   }
 
@@ -107,7 +119,7 @@ export class ToggleButtonModel {
     this.buttonModelList.forEach((btnModel, index) => {
       if (index != exceptIndex) {
         this.buttonSelStatus[index] = false
-        btnModel.options.backgroundColor = this.options.backgroundColor
+        btnModel.backgroundColor = this.backgroundColor
       }
     })
   }

@@ -26,14 +26,34 @@ export const MaterialSpacing = {
   TEXT_ICON_BUTTON_SPACING: 8
 }
 
-export class ButtonModel {
-  public options: ButtonOptions = {}
+export class ButtonModel  implements ButtonOptions{
+  variant: ButtonVariant = ButtonVariant.TEXT
+  content: string = undefined
+  iconSrc: string | PixelMap | Resource = undefined
+  borderStyle: BorderStyle = undefined
+  borderWidth: number = undefined
+  borderRadius: number = undefined
+  backgroundColor: ResourceColor = undefined
+  fontColor: ResourceColor = undefined
+  borderColor: ResourceColor = undefined
+  fontSize: number = 20
+  width: number = undefined
+  height: number = undefined
+  margin: Margin | Length = undefined
+  padding: Padding | Length = undefined
+  elevation: number = undefined
+  ripple: boolean = true
+  showRipple: boolean = false
+  rippleColor: ResourceColor = Color.White
+  opacity: number = 1
+  responseCode: number = undefined
+
   public shadowRadius = 0;
   public spaceBetweenIconAndText = 0
 
   constructor(options: ButtonOptions) {
     if (options) {
-      let defaultSet = {}
+      let defaultSet : ButtonOptions = {}
       let hasIconNText = false
       if (options.content && options.iconSrc) {
         hasIconNText = true
@@ -104,23 +124,27 @@ export class ButtonModel {
 
   public update(options: ButtonOptions) {
     if (options) {
-      if (options.variant != undefined) this.options.variant = options.variant
-      if (options.content != undefined) this.options.content = options.content
-      if (options.iconSrc != undefined) this.options.iconSrc = options.iconSrc
-      if (options.borderStyle != undefined) this.options.borderStyle = options.borderStyle
-      if (options.borderWidth != undefined) this.options.borderWidth = options.borderWidth
-      if (options.borderRadius != undefined) this.options.borderRadius = options.borderRadius
-      if (options.backgroundColor != undefined) this.options.backgroundColor = options.backgroundColor
-      if (options.fontColor != undefined) this.options.fontColor = options.fontColor
-      if (options.fontSize != undefined) this.options.fontSize = options.fontSize
-      if (options.width != undefined) this.options.width = options.width
-      if (options.height != undefined) this.options.height = options.height
-      if (options.responseCode != undefined) this.options.responseCode = options.responseCode
-      if (options.margin != undefined) this.options.margin = options.margin
-      if (options.padding != undefined) this.options.padding = options.padding
-      if (options.ripple != undefined) this.options.ripple = options.ripple
-      if (options.rippleColor != undefined) this.options.rippleColor = options.rippleColor
-      if (options.opacity != undefined) this.options.opacity = options.opacity
+      if (options.variant != undefined) this.variant = options.variant
+      if (options.content != undefined) this.content = options.content
+      if (options.iconSrc != undefined) this.iconSrc = options.iconSrc
+      if (options.borderStyle != undefined) this.borderStyle = options.borderStyle
+      if (options.borderWidth != undefined) this.borderWidth = options.borderWidth
+      if (options.borderRadius != undefined) this.borderRadius = options.borderRadius
+      if (options.backgroundColor != undefined) this.backgroundColor = options.backgroundColor
+      if (options.fontColor != undefined) this.fontColor = options.fontColor
+      if (options.fontSize != undefined) this.fontSize = options.fontSize
+      if (options.width != undefined) this.width = options.width
+      if (options.height != undefined) this.height = options.height
+      if (options.responseCode != undefined) this.responseCode = options.responseCode
+      if (options.margin != undefined) this.margin = options.margin
+      if (options.padding != undefined) this.padding = options.padding
+      if (options.ripple != undefined) this.ripple = options.ripple
+      if (options.rippleColor != undefined) this.rippleColor = options.rippleColor
+      if (options.opacity != undefined) this.opacity = options.opacity
     }
+  }
+
+  public setFontColor(color : ResourceColor) {
+    this.fontColor = color
   }
 }

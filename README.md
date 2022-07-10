@@ -22,20 +22,27 @@ For using material button in your app, add the below dependency in entry/package
 
 ##### 1. Material Button is added by importing Mbutton to application, and by passing Button options we can set the attributes of button, like BackGround, FontSize etc..
 
+
 ```javascript
-import {MButton, ButtonVariant, ButtonOptions} from "@ohos/material-button"
+import { MButton, ButtonVariant, ToggleButton } from "@ohos/material-button"
 
 @Component
 struct Index {
   build() {
     Column() {
-      MButton(variant: ButtonVariant.CONTAINED,
-      backgroundColor: "#D3D3D3",
-      content: "Continue",
-      fontSize: 20,
-      margin: { left: 120 },
-      fontColor: Color.Black,
-      cbOnClick: () => this.readMoreOpenClose())
+      MButton({
+        options: {
+          variant: ButtonVariant.CONTAINED,
+          backgroundColor: "#D3D3D3",
+          content: "Continue",
+          fontSize: 20,
+          margin: { left: 120 },
+          fontColor: Color.Black
+        },
+        clickCallBack: {
+          callback: () => this.readMoreOpenClose()
+        }
+      })
     }
   }
 
@@ -44,7 +51,9 @@ struct Index {
   }
 }
 ```
+
 ##### 2. Adding Material Toggle button to the application, we can set both Text and Icon for Toggle button.
+
 ```javascript
 import {ToggleButton, ButtonOptions, ToggleButtonOptions} from "@ohos/material-button"
 @Component
@@ -52,16 +61,21 @@ struct Index {
     build() {
       Column() {
         ToggleButton({
-          data: [{ content: "Text1", checked: false, enable: true }, {content: "Text2", checked: true, enable: true}, { content: "Text3", checked: false }],
-          backgroundColor: Color.White,
-          selectedBackgroundColor: "#FF1493",
-          width: 90,
-          height: 60,
-          fontSize: 13,
-          toggleBorderWidth: 1,
-          fontColor: Color.Black,
-          cbSelectionOnClick: (checkedIndexes) => this.sizeSelect(checkedIndexes)
-      })
+          options: {
+            data: [{ content: this.AvailableSizes[0], checked: false, enable: true },
+                   { content: this.AvailableSizes[1], checked: true, enable: true }, 
+                   { content: this.AvailableSizes[2], checked: false },
+                   { content: this.AvailableSizes[3], checked: false }],
+            backgroundColor: Color.White,
+            selectedBackgroundColor: "#FF1493",
+            width: 90,
+            height: 60,
+            fontSize: 13,
+            toggleBorderWidth: 1,
+            fontColor: Color.Black
+            },
+          onToggleSelection: (checkedIndexes: number[]) => this.sizeSelect(checkedIndexes)
+        })
       }
     }
     
@@ -77,7 +91,7 @@ struct Index {
 | Attribute | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `variant` | `ButtonVariant` | Select Variant TEXT, OUTLINED, CONTAINED |
-| `clickCallback` | `(event: ClickEvent, responseCode: number) => void` | Callback to set to listen ClickEvent |
+| `clickCallBack` | `(event: ClickEvent, responseCode: number) => void` | Callback to set to listen ClickEvent |
 | `responseCode` | `number` | Response code set during call back is returned same during call back |
 | `content` | `string` | button text |
 | `iconSrc` | `string or PixelMap or Resource` | icon path |
@@ -102,7 +116,7 @@ struct Index {
 | `data` | `TextualToggleType[] or IconToggleType[]` | List of Text or Icon buttons |
 | `width` | `Length` | width of each button |
 | `height` | `Length` | height of each button |
-| `cbSelectionOnClick` | `(checkedIndexes: number[]) => void` | call back with selected index |
+| `onToggleSelection` | `(checkedIndexes: number[]) => void` | set call back with selected index |
 | `toggleBorderWidth` | `number` | toggle Border width |
 | `borderWidth` | `number` | border width |
 | `backgroundColor` | `ResourceColor` | background color |
