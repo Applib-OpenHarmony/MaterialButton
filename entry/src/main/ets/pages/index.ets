@@ -28,7 +28,7 @@ struct Index {
         .fontSize("18fp")
         .fontColor(Color.Green)
         .alignSelf(ItemAlign.Start)
-        .margin({ bottom: 10vp, top: 20 })
+        .margin({ bottom: 10, top: 20 })
       MButton(
         {
           options: {
